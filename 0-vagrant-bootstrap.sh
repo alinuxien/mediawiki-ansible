@@ -42,3 +42,9 @@ echo "*************************************************"
 apt-get install -y tree
 apt-get clean -y
 
+echo "*********************************************"
+echo "* [8]: AJOUT DES 2 NODES DANS /ETC/HOSTS VM *"
+echo "*********************************************"
+echo "172.17.0.2 http1" | tee -a /etc/hosts
+echo "172.17.0.3 bdd1" | tee -a /etc/hosts
+
