@@ -1,0 +1,18 @@
+---
+# tasks file for apache
+- name: "Installation du serveur apache httpd"
+  apt:
+          name: apache2
+          state: present
+          update-cache: yes
+
+- name: "Activation du service apache"
+  service:
+          name: apache2
+          state: started
+          enabled: yes
+
+- name: "Installation des paquets PHP"
+  include: "php7-install.yml"
+  when: php_install|default(False)|bool
+

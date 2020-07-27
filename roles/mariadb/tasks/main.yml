@@ -1,0 +1,14 @@
+---
+
+# Installation des paquets mariadb serveur et son extension Python
+- name: "Installation du serveur de bd mariadb"
+  apt:
+          name:  "mariadb-server, python-mysqldb"
+          state: "present"
+
+# Active le service MariaDB
+- name: "Démarre le service bd mariadb"
+  service:
+          name:  "mysql"
+          state: "started"
+          enabled: yes

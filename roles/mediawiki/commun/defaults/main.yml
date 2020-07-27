@@ -1,0 +1,40 @@
+---
+
+# nom de la base de données
+mediawiki_db_name: "mediawiki"
+
+# nom de l’utilisateur de la base de données et son mot de passe
+mediawiki_db_user: "mediawiki"
+mediawiki_db_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36343762666638666362656434303436613661613833366637653236366438383734613232353565
+          6439613465363161326334616235623336343132383164350a346633306364656564646236396430
+          61336338313165353735356130663239666164646464373263316364646330343939343865366237
+          3037353034323035300a353632386434353763356338366132646337373834333032626238623236
+          6465
+
+# nom et mot de passe de l’administrateur Mediawiki
+mediawiki_admin_user: "admin"
+mediawiki_admin_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64363466333932366436333137336334666562613764623038643065323466353465313763376466
+          3661353131303139306639636534303362663364626335320a666363663035636661616231376166
+          36316430376265666164383463323432366137316564396364343634666564653364646565636261
+          3432646539613762650a396261303564613564366666353636636161313736396362386133316164
+          6139
+
+# nom du Mediawiki et son titre
+mediawiki_name: "mediawiki"
+mediawiki_title: "ELS"
+
+# l’emplacement du répertoire d'installation de Mediawiki
+mediawiki_directory: "/var/www/html/{{mediawiki_name}}"
+
+# répertoire de maintenance de Mediawiki
+mediawiki_maintenance_directory: "{{mediawiki_directory}}/maintenance"
+
+# Definie le premier node du groupe mariadb
+mediawiki_db_host: "{{groups.db.0}}"
+
+# l’url des sources Mediawiki
+mediawiki_archive_url: "https://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.1.tar.gz"

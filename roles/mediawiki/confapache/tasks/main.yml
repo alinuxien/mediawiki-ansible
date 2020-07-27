@@ -1,0 +1,53 @@
+---
+
+#1. Création du repertoire pour l’installation des fichiers Mediawiki
+- name: "mediawiki directory"
+  file:
+          path: "{{mediawiki_directory}}"
+          owner: "www-data"
+          group: "www-data"
+          state: directory
+
+#2. Décompresse le fichier source archive Mediawiki et le formate sans extension
+- name: "uncompress mediawiki archive"
+  unarchive:
+          src: "{{mediawiki_archive_url}}"
+          dest: "{{mediawiki_directory}}"
+          owner: "www-data"
+          group: "www-data"
+          remote_src: yes
+          validate_certs: no
+# supprime mediawiki-1.xx.x/ du chemin
+          extra_opts: --transform=s/mediawiki-[0-9\.]*\///
+
+#3. Exécute la tâche avec l'utilisateur apache, se place dans le répertoire de maintenance et exécute la commande de configuration si le fichier localsetting.php n’existe pas
+- name: "mediawiki configuration"
+  become: yes
+  become_user: "www-data"
+  args:
+          creates: "{{mediawiki_directory}}/LocalSettings.php"
+          chdir: "{{mediawiki_maintenance_directory}}"
+  command:
+          php install.php --scriptpath /{{mediawiki_name}}
+          --dbname mediawiki --lang fr
+          --dbuser {{mediawiki_db_user}}
+          --dbpass {{mediawiki_db_password}}
+          --pass {{mediawiki_admin_password}}
+          --dbserver {{mediawiki_db_host}}  
+          {{mediawiki_title}} {{mediawiki_admin_user}}
+  run_once: yes
+  delegate_to: "{{item}}"
+  with_items: "{{groups.apache}}"
+
+#4. Exécute la tâche avec l'utilisateur apache, se place dans le répertoire de maintenance et exécute la commande de mise à jour de la baseune seule fois    
+- name: "mediawiki db update"
+  become: yes
+  become_user: "www-data"
+  command:
+          php update.php --quick
+  args:
+          chdir: "{{mediawiki_maintenance_directory}}"
+  # La mise à jour à besoin d'être lancée une seule fois
+  run_once: yes
+  register: resultat
+  changed_when: "' ...done.' in resultat.stdout"

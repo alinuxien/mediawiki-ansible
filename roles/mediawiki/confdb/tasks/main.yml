@@ -1,0 +1,17 @@
+---
+
+#1. Installation de la base de donnée Mediawiki
+- name: "Création de la base de données mediawiki"
+  mysql_db:
+          name: "{{mediawiki_db_name}}"
+          state: present
+
+#2. Création d’un accès utilisateur et attribution des privilèges sur la base Mediawiki
+- name: "Création utilisateur et privilèges sur la bd mediawiki"
+  mysql_user:
+          name: "{{mediawiki_db_user}}"
+          password: "{{mediawiki_db_password}}"
+          priv: "{{mediawiki_db_name}}.*:ALL"
+          host: "{{item}}"
+          state: present
+  with_items: "{{groups.db}}"
