@@ -1,7 +1,7 @@
 ---
 - name: "Installation de PHP 7.0"
   apt:
-          name: "php, php-mysql, php-xml, php-mbstring, php-mcrypt, php-gd, php-intl"
+          name: "php, php-mysql, php-xml, php-mbstring, php-mcrypt, php-gd, php-intl, php-apcu"
           state: latest
   changed_when: yes
   notify: [ "apache restart" ]

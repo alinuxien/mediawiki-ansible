@@ -3,8 +3,16 @@
 # Installation des paquets mariadb serveur et son extension Python
 - name: "Installation du serveur de bd mariadb"
   apt:
-          name:  "mariadb-server, python-mysqldb"
+          name:  "mariadb-server-10.1, python-mysqldb"
           state: "present"
+
+# PERSO : Ecoute de tous les hotes au lieu de localhost seulement
+- name: "[MariaDB] Config - Ecoute tous les hotes"
+  lineinfile:
+          path: "/etc/mysql/mariadb.conf.d/50-server.cnf"
+          regexp: 'bind-address\t*\s*= 127\.0\.0\.1'
+          line: '#bind-address = 127.0.0.1'
+          backrefs: yes
 
 # Active le service MariaDB
 - name: "Démarre le service bd mariadb"
@@ -12,3 +20,5 @@
           name:  "mysql"
           state: "started"
           enabled: yes
+   
+

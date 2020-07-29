@@ -1,5 +1,8 @@
 ---
 
+# AJOUT PERSO dans le respect du bon usage du module mysql_user
+db_root_password: "alinuxien"
+
 # nom de la base de données
 mediawiki_db_name: "mediawiki"
 
