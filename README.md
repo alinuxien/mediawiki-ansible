@@ -1,7 +1,7 @@
 # Bienvenue sur mon projet mediawiki installé par Ansible !
 Il s'agit d'un exercice de cours Ansible, réalisé en Juillet 2020, dans le cadre de ma formation "Expert DevOps" chez OpenClassRooms.
 ## Ca fait quoi ?
-Ca réalise l'installation et la configuration de base de mediawiki ( un gestionnaire de wiki à la Wikipedia ), à l'aide de Ansible, sur une infrastructure virtuelle, et accessible depuis la machine hôte.
+Ca réalise l'installation et la configuration de base de mediawiki ( un gestionnaire de wiki à la Wikipedia ), à l'aide de Ansible, sur une infrastructure virtuelle ( VM Ubuntu et 2 Containers Debian ), et accessible depuis la machine hôte.
 ## TRES IMPORTANT
 CE CONTENU A ETE FAIT POUR EXERCICE ANSIBLE ET N'EST PAS SECURISE CORRECTEMENT, IL NE DOIT DONC PAS ETRE UTILISE EN PRODUCTION MAIS POUR TEST UNIQUEMENT
 ## Ca ressemble à quoi ?
