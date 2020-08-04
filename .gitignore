@@ -1,0 +1,5 @@
+3-ansible-bootstrap.sh.bak
+Dockerfile.bak
+.ssh/
+.vagrant/
+6-ansible-cp-ssh-key.sh.bak
